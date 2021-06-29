@@ -24,12 +24,10 @@ const Home: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> =
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const genre = context.query.genre as string;
-  const requestObj = (requests as any)[genre];
+  const genre = context.query.genre as string | null;
+  const requestObj = genre ? (requests as any)[genre] : requests.fetchTrending;
   const request = await fetch(
-    `https://api.themoviedb.org/3${
-      requestObj.url ? requestObj.url : requests.fetchTrending.url
-    }`
+    `https://api.themoviedb.org/3${requestObj.url}`
   ).then((res) => res.json());
   return {
     props: {
