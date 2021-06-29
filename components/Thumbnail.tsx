@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import Image from "next/image";
-import Results, { IMovieResult } from "./Results";
+import { IMovieResult } from "./Results";
 import { ThumbUpIcon } from "@heroicons/react/outline";
 
 interface ThumbnailProps {
@@ -10,7 +10,6 @@ interface ThumbnailProps {
 const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
   ({ movie }, ref) => {
     const baseUrl = "https://image.tmdb.org/t/p/original";
-    //console.log(movie);
     return (
       <div
         ref={ref}
@@ -25,6 +24,7 @@ const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
           layout="responsive"
           height={1080}
           width={1920}
+          alt="Movie Poster"
         />
         <div className="p-2">
           <p className="truncate max-w-md">{movie.overview}</p>
@@ -42,5 +42,7 @@ const Thumbnail = forwardRef<HTMLDivElement, ThumbnailProps>(
     );
   }
 );
+
+Thumbnail.displayName = "Thumbnail";
 
 export default Thumbnail;
